@@ -1,2 +1,0 @@
-# checkout-ms
-checkout-ms
