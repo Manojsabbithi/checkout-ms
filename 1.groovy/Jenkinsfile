@@ -10,7 +10,7 @@ pipeline {
         stage ('Prepare Tag') {
             steps {
                 echo "Using Registry: ${env.REGISTRY_URL}"
-                echo "Using Image Repository: ${env.IMAGE_REPOSITORY"
+                echo "Using Image Repository: ${env.IMAGE_REPOSITORY}"
                 echo "Using Image Tag: ${GIT_COMMIT}"
             }
         }
