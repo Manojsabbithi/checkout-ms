@@ -12,9 +12,6 @@ pipeline {
                 echo "Using Registry: ${env.REGISTRY_URL}"
                 echo "Using Image Repository: ${env.IMAGE_REPOSITORY}"
                 echo "Using Image Tag: ${GIT_COMMIT}"
-                echo "printing the env variables"
-                echo "REGISTRY_URL: ${env.REGISTRY_URL}"
-                echo "IMAGE_REPOSITORY: ${env.IMAGE_REPOSITORY}"
             }
         }
         // stage('Build Docker Image') {
