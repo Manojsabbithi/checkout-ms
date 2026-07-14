@@ -13,15 +13,16 @@ pipeline {
                 echo "Using Registry: ${env.REGISTRY_URL}"
                 echo "Using Image Repository: ${env.IMAGE_REPOSITORY}"
                 echo "Using Image Tag: ${GIT_COMMIT}"
+                echo " Full Image Tag: ${env.IMAGE_TAG}"
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    sh 'docker build -t ${env.IMAGE_TAG} --build-arg NEXT_PUBLIC_API_BASE_URL=http://34.174.193.251:8080 .'
-                }
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         script {
+        //             sh 'docker build -t ${env.IMAGE_TAG} --build-arg NEXT_PUBLIC_API_BASE_URL=http://34.174.193.251:8080 .'
+        //         }
+        //     }
+        // }
     }
 
 }
