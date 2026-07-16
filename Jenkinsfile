@@ -9,6 +9,8 @@ pipeline {
     environment {
         REGISTRY_URL = "docker.io"
         IMAGE_REPOSITORY = "manojdock97/I27-helpdesk-ui"
+
+        REGISTRY_CREDENTIALS_ID = credentials('dockerhub-credentials')
     }
     stages {
         stage ('Prepare Tag') {
@@ -51,6 +53,23 @@ pipeline {
             steps {
                 script {
                     sh "docker build -t ${env.IMAGE_TAG} --build-arg NEXT_PUBLIC_API_BASE_URL=${env.NEXT_PUBLIC_API_BASE_URL} ."
+                }
+            }
+        }
+        stage('Push Docker Image') {
+            when {
+                expression {
+                    return params.BUILD
+                }
+            }
+            steps {
+                script {
+                    // should create dockerhub-credentials in jenkins with username - manojsabbithi9@gmail.com and password Manoj1997! of dockerhub
+                    echo "*************************** Docker Login *************************** "
+                    sh "docker login -u ${env.REGISTRY_CREDENTIALS_ID_USR} -p ${env.REGISTRY_CREDENTIALS_ID_PSW} ${env.REGISTRY_URL}"
+                    echo "*************************** Docker Push *************************** "
+                    sh "docker push ${env.IMAGE_TAG}"
+                    }
                 }
             }
         }
