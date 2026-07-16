@@ -41,10 +41,13 @@ pipeline {
     stages {
         stage ('Prepare Tag') {
             steps {
-                env.IMAGE_TAG = env.REGISTRY_URL + "/" + env.IMAGE_REPOSITORY + ":" + GIT_COMMIT
-                echo "Using Registry: ${env.REGISTRY_URL}"
-                echo "Using Image Repository: ${env.IMAGE_REPOSITORY}"
-                echo "Using Image Tag: ${GIT_COMMIT}"
+                script {
+                    env.IMAGE_TAG = env.REGISTRY_URL + "/" + env.IMAGE_REPOSITORY + ":" + GIT_COMMIT
+                    echo "Using Registry: ${env.REGISTRY_URL}"
+                    echo "Using Image Repository: ${env.IMAGE_REPOSITORY}"
+                    echo "Using Image Tag: ${GIT_COMMIT}"
+                    echo " Full Image Tag: ${env.IMAGE_TAG}"
+                }
             }
         }
         stage('Build Docker Image') {
