@@ -22,7 +22,7 @@ pipeline {
         // stage('Build Docker Image') {
         //     steps {
         //         script {
-        //             sh 'docker build -t ${env.IMAGE_TAG} --build-arg NEXT_PUBLIC_API_BASE_URL=http://34.174.193.251:8080 .'
+        //             sh 'docker build -t ${env.IMAGE_TAG} --build-arg NEXT_PUBLIC_API_BASE_URL=http://334.174.72.218:8080 .'
         //         }
         //     }
         // }
