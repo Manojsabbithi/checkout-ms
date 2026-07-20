@@ -8,7 +8,7 @@ pipeline {
     }
     environment {
         REGISTRY_URL = "docker.io"
-        IMAGE_REPOSITORY = "manojdock97/I27-helpdesk-ui"
+        IMAGE_REPOSITORY = "manojdock97/jenkins-test"
 
         // REGISTRY_CREDENTIALS_ID = credentials('dockerhub-credentials')
     }
@@ -73,4 +73,6 @@ pipeline {
                 }
             }
         }
+    }
+
 }
