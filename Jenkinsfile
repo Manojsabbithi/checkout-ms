@@ -62,15 +62,15 @@ pipeline {
                     return params.BUILD
                 }
             }
-            steps {
-                script {
-                    // should create dockerhub-credentials in jenkins with username - manojsabbithi9@gmail.com and password Manoj1997! of dockerhub
-                    echo "*************************** Docker Login *************************** "
-                    sh "docker login -u ${env.REGISTRY_CREDENTIALS_ID_USR} -p ${env.REGISTRY_CREDENTIALS_ID_PSW} ${env.REGISTRY_URL}"
-                    echo "*************************** Docker Push *************************** "
-                    sh "docker push ${env.IMAGE_TAG}"
-                    }
-                }
+            // steps {
+            //     script {
+            //         // should create dockerhub-credentials in jenkins with username - manojsabbithi9@gmail.com and password Manoj1997! of dockerhub
+            //         echo "*************************** Docker Login *************************** "
+            //         sh "docker login -u ${env.REGISTRY_CREDENTIALS_ID_USR} -p ${env.REGISTRY_CREDENTIALS_ID_PSW} ${env.REGISTRY_URL}"
+            //         echo "*************************** Docker Push *************************** "
+            //         sh "docker push ${env.IMAGE_TAG}"
+            //         }
+            //     }
             }
         }
     }
