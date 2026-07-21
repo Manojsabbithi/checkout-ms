@@ -10,7 +10,7 @@ pipeline {
         REGISTRY_URL = "docker.io"
         IMAGE_REPOSITORY = "manojdock97/jenkins-test"
 
-        REGISTRY_CREDENTIALS_ID = credentials('dockerhub-credentials')
+        REGISTRY_CREDENTIALS_ID = credentials('docker-credentials')
     }
     stages {
         stage ('Prepare Tag') {
