@@ -72,7 +72,6 @@ pipeline {
                         }
                     }
                 }
-            }
         }
         stage('Build Docker Image') {
             when {
@@ -101,7 +100,6 @@ pipeline {
                     sh "docker push ${env.IMAGE_TAG}"
                     }
                 }
-            }
         }
     }
     post {
@@ -115,3 +113,4 @@ pipeline {
             echo "Build failed."   
         }
     }
+}
