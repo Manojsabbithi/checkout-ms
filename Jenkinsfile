@@ -44,6 +44,21 @@ pipeline {
                 }
             }
         }
+        stage('SonarQube Analysis') {
+            when {
+                expression {
+                    return params.BUILD
+                }
+            }
+            steps {
+                script {
+                    def scannerHome = tool 'SonarQubeScanner'
+                    withSonarQubeEnv('sonarqube') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
+        }
         stage('Build Docker Image') {
             when {
                 expression {
