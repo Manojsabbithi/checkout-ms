@@ -12,6 +12,10 @@ pipeline {
         IMAGE_REPOSITORY = "manojdock97/jenkins-test"
 
         REGISTRY_CREDENTIALS_ID = credentials('docker-crendetials')
+
+        DEV_CLUSTER_NAME = "np-cluster"
+        DEV_CLUSTER_ZONE = "us-east4-a"
+        DEV_PROJECT_ID = "project-cdc0b247-e969-48dc-823"
     }
     stages {
         stage ('Prepare Tag') {
@@ -102,6 +106,36 @@ pipeline {
                     }
                 }
         }
+        stage('GKE Auth') {
+            when {
+                expression {
+                    return params.TARGET_ENV == 'dev'
+                }
+            }
+            steps {
+                script {
+                    sh """
+                    echo "*************************** GKE Auth *************************** "
+                    gcloud container clusters get-credentials ${DEV_CLUSTER_NAME} --zone ${DEV_CLUSTER_ZONE} --project ${DEV_PROJECT_ID}
+                    echo "*************************** GKE Auth Completed *************************** "
+                    kubectl get nodes
+                    """
+                    }
+                }
+            }
+        }
+        // stage('DeployToDevEnvironment') {
+        //     when {
+        //         expression {
+        //             return params.BUILD && params.TARGET_ENV == 'dev'
+        //         }
+        //     }
+        //     steps {
+        //         script {
+                    
+        //         }
+        //     }
+        // }
     }
     post {
         always {
