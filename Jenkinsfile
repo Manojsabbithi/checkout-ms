@@ -3,7 +3,7 @@ pipeline {
         label 'k8s-slave'
     }
     parameters {
-        booleanParam(name: 'BUILD', defaultValue: true, description: 'Push the built image to the registry')
+        booleanParam(name: 'BUILD', defaultValue: true, description: 'Push the build image to the registry')
         choice(name: 'TARGET_ENV', choices: ['dev', 'test','stage','prod'], description: 'Select the environment to build')
         booleanParam(name: 'SKIP_SONAR', defaultValue: false, description: 'Skip the tests during build')
     }
@@ -123,18 +123,23 @@ pipeline {
                     }
                 }
             }
-        // stage('DeployToDevEnvironment') {
-        //     when {
-        //         expression {
-        //             return params.BUILD && params.TARGET_ENV == 'dev'
-        //         }
-        //     }
-        //     steps {
-        //         script {
-                    
-        //         }
-        //     }
-        // }
+        stage('DeployToDevEnvironment') {
+            when {
+                expression {
+                    return params.BUILD && params.TARGET_ENV == 'dev'
+                }
+            }
+            steps {
+                script {
+                    env.NAMESPACE = "i27-helpdesk-dev"
+                    sh """
+                    echo "*************************** Deploying to Dev Environment *************************** "
+                    echo "Deploying to namespace: ${env.NAMESPACE}"
+                    kubectl get pods -n ${env.NAMESPACE}
+                    """
+                }
+            }
+        }
     }
     post {
         always {
