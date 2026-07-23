@@ -123,7 +123,6 @@ pipeline {
                     }
                 }
             }
-        }
         // stage('DeployToDevEnvironment') {
         //     when {
         //         expression {
