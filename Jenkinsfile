@@ -146,6 +146,75 @@ pipeline {
                 }
             }
         }
+        stage('DeployToTestEnvironment') {
+            when {
+                expression {
+                    return params.BUILD && params.TARGET_ENV == 'test'
+                }
+            }
+            steps {
+                script {
+                    env.NAMESPACE = "i27-helpdesk-test"
+                    sh """
+                    echo "*************************** Deploying to Test Environment *************************** "
+                    echo "Deploying to namespace: ${env.NAMESPACE}"
+                    kubectl get pods -n ${env.NAMESPACE}
+                    sed -i "s|{NAMESPACE}|${env.NAMESPACE}|g" k8s/*.yaml
+                    sed -i "s|{IMAGE_NAME}|${env.IMAGE_REPOSITORY}|g" k8s/*.yaml
+                    sed -i "s|{IMAGE_TAG}|${GIT_COMMIT}|g" k8s/*.yaml
+                    echo "Applying Kubernetes manifests..."
+                    kubectl apply -f k8s/
+                    echo "Deployment completed."
+                    """
+                }
+            }
+        }
+        stage('DeployToStageEnvironment') {
+            when {
+                expression {
+                    return params.BUILD && params.TARGET_ENV == 'stage'
+                }
+            }
+            steps {
+                script {
+                    env.NAMESPACE = "i27-helpdesk-stage"
+                    sh """
+                    echo "*************************** Deploying to Stage Environment *************************** "
+                    echo "Deploying to namespace: ${env.NAMESPACE}"
+                    kubectl get pods -n ${env.NAMESPACE}
+                    sed -i "s|{NAMESPACE}|${env.NAMESPACE}|g" k8s/*.yaml
+                    sed -i "s|{IMAGE_NAME}|${env.IMAGE_REPOSITORY}|g" k8s/*.yaml
+                    sed -i "s|{IMAGE_TAG}|${GIT_COMMIT}|g" k8s/*.yaml
+                    echo "Applying Kubernetes manifests..."
+                    kubectl apply -f k8s/
+                    echo "Deployment completed."
+                    """
+                }
+            }
+        }
+        stage('DeployToProdEnvironment') {
+            when {
+                expression {
+                    return params.BUILD && params.TARGET_ENV == 'prod'
+                }
+            }
+            steps {
+                script {
+                    env.NAMESPACE = "i27-helpdesk-prod"
+                    sh """
+                    echo "*************************** Deploying to Prod Environment *************************** "
+                    echo "Deploying to namespace: ${env.NAMESPACE}"
+                    kubectl get pods -n ${env.NAMESPACE}
+                    sed -i "s|{NAMESPACE}|${env.NAMESPACE}|g" k8s/*.yaml
+                    sed -i "s|{IMAGE_NAME}|${env.IMAGE_REPOSITORY}|g" k8s/*.yaml
+                    sed -i "s|{IMAGE_TAG}|${GIT_COMMIT}|g" k8s/*.yaml
+                    echo "Applying Kubernetes manifests..."
+                    kubectl apply -f k8s/
+                    echo "Deployment completed."
+                    """
+                }
+            }
+        }
     }
     post {
         always {
