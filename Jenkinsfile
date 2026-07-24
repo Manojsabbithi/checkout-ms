@@ -140,8 +140,7 @@ pipeline {
                     sed -i "s|{IMAGE_NAME}|${env.IMAGE_REPOSITORY}|g" k8s/*.yaml
                     sed -i "s|{IMAGE_TAG}|${env.IMAGE_TAG}|g" k8s/*.yaml
                     echo "Applying Kubernetes manifests..."
-                    kubectl apply -f k8s/deploy.yaml -n ${env.NAMESPACE}
-                    kubectl apply -f k8s/service.yaml -n ${env.NAMESPACE}
+                    kubectl apply -f k8s/
                     echo "Deployment completed."
                     """
                 }
