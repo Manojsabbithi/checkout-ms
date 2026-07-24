@@ -1,8 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: i27-helpdesk-ui
-  namespace: ${NAMESPACE}
+  namespace: {NAMESPACE}
 spec:
   replicas: 1
   selector:
@@ -15,7 +14,7 @@ spec:
     spec:
       containers:
         - name: i27-helpdesk-ui
-          image: ${IMAGE_NAME}:${IMAGE_TAG}
+          image: {IMAGE_NAME}:{IMAGE_TAG}
           ports:
             - containerPort: 3000
           resources:
