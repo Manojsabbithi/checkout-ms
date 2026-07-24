@@ -119,6 +119,7 @@ pipeline {
                     gcloud container clusters get-credentials ${DEV_CLUSTER_NAME} --zone ${DEV_CLUSTER_ZONE} --project ${DEV_PROJECT_ID}
                     echo "*************************** GKE Auth Completed *************************** "
                     kubectl get nodes
+                    kubectl apply -f k8s/
                     """
                     }
                 }
@@ -136,7 +137,7 @@ pipeline {
                     echo "*************************** Deploying to Dev Environment *************************** "
                     echo "Deploying to namespace: ${env.NAMESPACE}"
                     kubectl get pods -n ${env.NAMESPACE}
-                    
+
                     """
                 }
             }
