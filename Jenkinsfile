@@ -187,7 +187,8 @@ pipeline {
                 allOf {
                     expression {
                         return params.BUILD && params.TARGET_ENV == 'stage'
-                    }anyOf {
+                    }
+                    anyOf {
                         branch ('release/*')
                         tag pattern: 'v\\d+\\.\\d+\\.\\d+', comparator: 'REGEXP'
                     }
