@@ -205,11 +205,12 @@ pipeline {
         stage('DeployToProdEnvironment') {
             when {
                 allOf {
-                expression {
-                    return params.BUILD && params.TARGET_ENV == 'prod'
-                }
-                anyOf {
-                    tag pattern: 'v\\d+\\.\\d+\\.\\d+', comparator: 'REGEXP'
+                    expression {
+                        return params.BUILD && params.TARGET_ENV == 'prod'
+                    }
+                    anyOf {
+                        tag pattern: 'v\\d+\\.\\d+\\.\\d+', comparator: 'REGEXP'
+                    }
                 }
             }
             steps {
