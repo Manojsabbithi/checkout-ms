@@ -66,13 +66,13 @@ pipeline {
                             env.NEXT_PUBLIC_API_BASE_URL = "http://34.174.72.218:8080"
                             break
                         case 'test':
-                            env.NEXT_PUBLIC_API_BASE_URL = "http://34.174.72.218:8081"
+                            env.NEXT_PUBLIC_API_BASE_URL = "http://test-gateway.i27helpdesk.in"
                             break
                         case 'stage':
-                            env.NEXT_PUBLIC_API_BASE_URL = "http://34.174.72.218:8082"
+                            env.NEXT_PUBLIC_API_BASE_URL = "http://stage-gateway.i27helpdesk.in"
                             break
                         case 'prod':
-                            env.NEXT_PUBLIC_API_BASE_URL = "http://34.174.72.218:8083"
+                            env.NEXT_PUBLIC_API_BASE_URL = "http://prod-gateway.i27helpdesk.in"
                             break
                     }
                     echo "Using Registry: ${env.REGISTRY_URL}"
