@@ -190,7 +190,7 @@ pipeline {
                     }
                     anyOf {
                         branch ('release/*')
-                        tag pattern: 'v\\d+\\.\\d+\\.\\d+', comparator: 'REGEXP'
+                        tag pattern: 'v\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}', comparator: 'REGEXP'
                     }
                 }
                 
@@ -210,7 +210,7 @@ pipeline {
                         return params.BUILD && params.TARGET_ENV == 'prod'
                     }
                     anyOf {
-                        tag pattern: 'v\\d+\\.\\d+\\.\\d+', comparator: 'REGEXP'
+                        tag pattern: 'v\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}', comparator: 'REGEXP'
                     }
                 }
             }
