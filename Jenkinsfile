@@ -1,4 +1,4 @@
-def deplpoytoEnv(String namespace) {
+def deploytoEnv(String namespace) {
     sh """
     echo "*************************** Deploying to ${namespace} Environment *************************** "
     echo "Deploying to namespace: ${namespace}"
@@ -164,7 +164,7 @@ pipeline {
             }
             steps {
                 script {
-                    gkeAuth("${DEV_CLUSTER_NAME}", "${DEV_CLUSTER_ZONE}", "${DEV_PROJECT_ID}")
+                    GKEAuth("${DEV_CLUSTER_NAME}", "${DEV_CLUSTER_ZONE}", "${DEV_PROJECT_ID}")
                     deploytoEnv("i27-helpdesk-dev")
                 }
             }
@@ -177,7 +177,7 @@ pipeline {
             }
             steps {
                 script {
-                    gkeAuth("${TEST_CLUSTER_NAME}", "${TEST_CLUSTER_ZONE}", "${TEST_PROJECT_ID}")
+                    GKEAuth("${TEST_CLUSTER_NAME}", "${TEST_CLUSTER_ZONE}", "${TEST_PROJECT_ID}")
                     deploytoEnv("i27-helpdesk-test")
                 }
             }
@@ -190,7 +190,7 @@ pipeline {
             }
             steps {
                 script {
-                    gkeAuth("${STAGE_CLUSTER_NAME}", "${STAGE_CLUSTER_ZONE}", "${STAGE_PROJECT_ID}")
+                    GKEAuth("${STAGE_CLUSTER_NAME}", "${STAGE_CLUSTER_ZONE}", "${STAGE_PROJECT_ID}")
                     deploytoEnv("i27-helpdesk-stage")
                 }
     
@@ -204,7 +204,7 @@ pipeline {
             }
             steps {
                 script {
-                    gkeAuth("${PROD_CLUSTER_NAME}", "${PROD_CLUSTER_ZONE}", "${PROD_PROJECT_ID}")
+                    GKEAuth("${PROD_CLUSTER_NAME}", "${PROD_CLUSTER_ZONE}", "${PROD_PROJECT_ID}")
                     deploytoEnv("i27-helpdesk-prod")
                 }
             }
