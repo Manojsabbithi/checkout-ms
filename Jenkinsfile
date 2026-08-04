@@ -119,7 +119,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh "docker --no-cache build -t ${env.IMAGE_TAG} --build-arg NEXT_PUBLIC_API_BASE_URL=${env.NEXT_PUBLIC_API_BASE_URL} ."
+                    sh "docker build -t ${env.IMAGE_TAG} --build-arg NEXT_PUBLIC_API_BASE_URL=${env.NEXT_PUBLIC_API_BASE_URL} ."
                 }
             }
         }
