@@ -43,7 +43,7 @@ pipeline {
         TEST_PROJECT_ID = "project-cdc0b247-e969-48dc-823"
 
         STAGE_CLUSTER_NAME = "np-cluster"
-        STAGE_CLUSTER_ZONE = "us-east4-a"b 
+        STAGE_CLUSTER_ZONE = "us-east4-a"
         STAGE_PROJECT_ID = "project-cdc0b247-e969-48dc-823"
 
         PROD_CLUSTER_NAME = "np-cluster"
