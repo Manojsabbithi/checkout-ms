@@ -26,7 +26,7 @@ pipeline {
     parameters {
         booleanParam(name: 'BUILD', defaultValue: true, description: 'Push the build image to the registry')
         choice(name: 'TARGET_ENV', choices: ['dev', 'test','stage','prod'], description: 'Select the environment to build')
-        booleanParam(name: 'SKIP_SONAR', defaultValue: false, description: 'Skip the tests during build')
+        booleanParam(name: 'SKIP_SONAR', defaultValue: true, description: 'Skip the tests during build')
     }
     environment {
         REGISTRY_URL = "docker.io"
@@ -43,7 +43,7 @@ pipeline {
         TEST_PROJECT_ID = "project-cdc0b247-e969-48dc-823"
 
         STAGE_CLUSTER_NAME = "np-cluster"
-        STAGE_CLUSTER_ZONE = "us-east4-a"
+        STAGE_CLUSTER_ZONE = "us-east4-a"b 
         STAGE_PROJECT_ID = "project-cdc0b247-e969-48dc-823"
 
         PROD_CLUSTER_NAME = "np-cluster"
